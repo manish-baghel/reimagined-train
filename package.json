@@ -1,0 +1,51 @@
+{
+  "name": "reimagined-train",
+  "version": "1.0.0",
+  "description": "Server for donate system",
+  "main": "app.js",
+  "scripts": {
+    "start:ts": "ENV='dev' nodemon --watch 'src' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ENV='dev' tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manish-baghel/reimagined-train.git"
+  },
+  "keywords": [
+    "nodejs",
+    "npm",
+    "express",
+    "mongodb"
+  ],
+  "author": "manish-baghel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manish-baghel/reimagined-train/issues"
+  },
+  "homepage": "https://github.com/manish-baghel/reimagined-train#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "boom": "^7.3.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.9",
+    "mongoose-type-url": "^1.0.6",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.7",
+    "ejs": "^2.7.1",
+    "nodemon": "^1.19.4",
+    "ts-node": "^7.0.1",
+    "tsc": "^1.20150623.0",
+    "typescript": "^3.7.2",
+    "typescript-eslint-parser": "^22.0.0",
+    "yenv": "^2.1.0"
+  }
+}

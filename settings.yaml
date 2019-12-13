@@ -1,0 +1,14 @@
+# development settings
+dev:
+  ENV: "dev"
+  PORT: 3001
+  CLIENT_URL: http://localhost
+  devMode: true
+  DB_URL: "mongodb://localhost"
+  DB_PORT: 27017
+  DB_NAME: "reimagined-train"
+  SALT_ROUNDS: 29
+  SESSION_SECRET: "12d17RATAJKOWSKI"
+
+
+
