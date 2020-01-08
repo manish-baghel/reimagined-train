@@ -12,8 +12,10 @@ export interface IToken {
 
 const expressSession = async (req:Request, res:Response, next:NextFunction) => {
   const headerToken:any = req.headers[env.AUTH_TOKEN_TITLE] || req.header[env.ADMIN_AUTH_TOKEN_TITLE];
-  if(!headerToken)
+  if(!headerToken){
+    console.log("token not found");
     return next(boom.unauthorized("token not found"));
+  }
   try{
     const tokenData:any = await cryptService.verify(headerToken);
     const session:any = await Session.findOne({_id:tokenData.id}); 

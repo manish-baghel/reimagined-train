@@ -1,7 +1,7 @@
 {
   "name": "reimagined-train",
   "version": "1.0.0",
-  "description": "Server for donate system",
+  "description": "Server",
   "main": "app.js",
   "scripts": {
     "start:ts": "ENV='dev' nodemon --watch 'src' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/app.ts",

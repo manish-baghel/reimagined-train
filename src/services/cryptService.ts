@@ -1,15 +1,27 @@
 import * as jwt from "./jwtService";
 import * as bcrypt from "bcryptjs";
 import { promisify } from "util";
-import { env } from "../app";
+import fs from "fs";
+// import * as obj from "../app";
+import path from "path";
+// const appText:any = fs.readFile(path.resolve("../app.ts"),(err,t) => {if(err) console.log(err); else console.log(t.toString())});
+// console.log(appText);
+
+// const env = app.env;
+import getEnv from '../sessionVariable';
+console.log(getEnv);
+const environment = process.env.ENV;
+const env = getEnv(environment);
 
 const SESSION_SECRET = env.SESSION_SECRET;
 const SALT_ROUNDS = env.SALT_ROUNDS;
 
 const _hash = async (pass:string, cb:Function) => {
   try{
+    console.log(pass);
     const hash = promisify(bcrypt.hash);
     const hashed = await hash(pass, SALT_ROUNDS);
+    console.log(hashed);
     return cb(null,hashed);
   }catch(err){
     console.log("==> Error in _hash cryptService: ", err);

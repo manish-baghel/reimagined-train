@@ -10,6 +10,7 @@ import AuthService from "../services/authService";
 
 
 const login = async(req:Request, res:Response, next:NextFunction) => {
+  console.log("<Here>");
   let { qtype } = req.query;
   if(!qtype)
     qtype = "default";
@@ -60,20 +61,21 @@ const login = async(req:Request, res:Response, next:NextFunction) => {
         return next(boom.badImplementation(err));
       }
 
-    case "default":
-      const {email, pass } = req.body;
+    default:
+      const {email, password } = req.body;
       const loggedInAt = Date.now();
-      if(!email || !pass)
+      if(!email || !password)
         return next(boom.unauthorized("E-mail address and Password are both required"));
       
       try{
-        const authResponse:any = await AuthService.authWithEmailPass(email,pass);
+        const authResponse:any = await AuthService.authWithEmailPass(email,password);
 
         if(!authResponse)
           return next(boom.badRequest("Something went wrong while authenticating"));
 
         const user:any = authResponse;
-        const newSession = await Session.createOne({user_id: user._id,loggedInAt});
+        const createdSession = new Session({user: user._id,loggedInAt});
+        const newSession = await createdSession.save();
         const sessionId:any = newSession._id;
         const rn = Math.floor(Math.random()*100000000 + Date.now());
         const {first_name,middle_name,last_name,gender,phone, dob} = user;
@@ -95,7 +97,7 @@ const login = async(req:Request, res:Response, next:NextFunction) => {
         return res.json({status:true, data, msg:"Logged in Successfully"});
       }catch(err){
         console.log("==> Error in User Login Application Controller[Mode:Default] ", err);
-        return next(boom.badImplementation(err));
+        return next(err);
       }
   }
 }

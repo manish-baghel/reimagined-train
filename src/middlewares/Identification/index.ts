@@ -6,7 +6,8 @@ const identification = async (req:Request, res:Response, next:NextFunction) => {
   if(!req.session)
     return next(boom.unauthorized("Session Not Found"));
   
-  const userId = req.session.userId;
+  const userId = req.session.user;
+  console.log(req.session);
   
   if (!userId)
     return next(boom.unauthorized("user id not found"));

@@ -21,14 +21,18 @@ const registerUser = async (req:Request, res:Response, next:NextFunction) => {
 	if(!req.body)
 		return next(boom.unauthorized("Please enter all required fields"));
 	let reqObject:IUserRegister = req.body;
+    console.log(reqObject);
 	const role:IRole = {
 		title:"customer"
 	}
+    const {email,first_name,last_name,password,gender,middle_name,phone} = reqObject;
 	const userValidationObject: IUserValidation = _validateUser(first_name,last_name, email, phone);
     if (!userValidationObject.status)
         return res.json(userValidationObject);
+    console.log(userValidationObject);
     try{
     	let hpass = await cryptService.hash(password);
+        console.log("brr");
     	let userModel = {
     		email,
     		first_name,
@@ -39,8 +43,11 @@ const registerUser = async (req:Request, res:Response, next:NextFunction) => {
     		phone,
     		role
     	}
+        console.log("bruhh");
     	const newUser = new User(userModel);
+        console.log(newUser);
     	const user = await newUser.save();
+        console.log("brruhh");
     	if(!user)
     		return next(boom.badImplementation("Unable to create user"));
     	const user_id = user._id.toString();
@@ -93,3 +100,10 @@ const _validateUser = (first_name: string,last_name: string, email: string, phon
     validationObj.msg = "Data is cool";
     return validationObj;
 }
+
+
+const userController = {
+  register:registerUser
+}
+
+export default userController;

@@ -8,7 +8,6 @@ import * as ejs from "ejs";
 import * as fs from "fs";
 import { env } from "./app";
 
-
 const environment = env.ENV;
 const app = express();
 

@@ -7,8 +7,10 @@ dev:
   DB_URL: "mongodb://localhost"
   DB_PORT: 27017
   DB_NAME: "reimagined-train"
-  SALT_ROUNDS: 29
+  SALT_ROUNDS: 9
   SESSION_SECRET: "12d17RATAJKOWSKI"
+  AUTH_TOKEN_TITLE: "auth-token"
+  ADMIN_AUTH_TOKEN_TITLE: "auth-token"
 
 
 

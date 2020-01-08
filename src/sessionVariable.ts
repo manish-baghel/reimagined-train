@@ -1,6 +1,6 @@
-import * as yenv from "yenv";
+import yenv from "yenv";
 const getEnv = (environment:string)=>{
-    const sessionVariables = yenv("settings.yaml", { env: environment});
+    const sessionVariables:any = yenv("settings.yaml", { env: environment});
 
     return sessionVariables;
 
