@@ -29,9 +29,9 @@ const registerSchool = async (req:Request, res:Response, next:NextFunction) => {
         if(!schoolAdmin)
             return next(boom.badRequest(`Please ask the person with email address - ${schoolAdmin} to register`));
         const role = "schoolAdmin";
-        const updatedSchoolAdmin = await User.findOneAndUpdate({email:school_admin},{email:school_admin,$set:{role:role}},{new:true});
         const newSchoolModel = new School({name:school_name,address:school_addr,phone,adminEmail:school_admin});
         const newSchool:any = await newSchoolModel.save();
+        const updatedSchoolAdmin = await User.findOneAndUpdate({email:school_admin},{email:school_admin,$set:{role:role,school:newSchool._id}},{new:true});
         return res.json({status:true,msg:"School added succesfully",data:newSchool});
     }catch(err){
     	console.log("==> Error in registerSchool [SchoolController]", err);

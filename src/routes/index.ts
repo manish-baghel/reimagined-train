@@ -12,7 +12,9 @@ const httpRoutes = (app:any) => {
   app.post('/login',applicationController.login);
   app.post('/register',userController.register);
 
+  app.get('/getAllReqs',requirementController.getAllRequirements);
   app.post('/addReq',expressSession,identification,imageUpload,requirementController.addRequirement);
+  app.post('/addReqTypes',expressSession,identification,requirementController.addRequirementTypes);
 
   app.post('/addSchool',expressSession,identification,schoolController.register);
 }

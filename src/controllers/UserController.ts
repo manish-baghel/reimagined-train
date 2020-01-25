@@ -27,6 +27,9 @@ const registerUser = async (req:Request, res:Response, next:NextFunction) => {
     if (!userValidationObject.status)
         return res.json(userValidationObject);
     try{
+        let regUser = await User.find({email:email});
+        if(regUser)
+            return next(boom.badRequest("User already exist with this email id"));
     	let hpass = await cryptService.hash(password);
     	let userModel = {
     		email,

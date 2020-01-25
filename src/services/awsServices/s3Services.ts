@@ -34,7 +34,7 @@ export const uploadImage = async (props: IUploadFile) =>{
         }
 
 		const uploadPath = await s3.upload(params).promise();
-		return uploadPath; 
+		return uploadPath.Location; 
 	}catch(err){
 		console.log("upload image to s3 error", err);
 		throw err;

@@ -25,6 +25,7 @@ const identification = async (req:Request, res:Response, next:NextFunction) => {
       role: user.role,
       first_name: user.first_name,
       last_name:user.last_name,
+      school:user.school
     }
     req.session.user_id = userId.toString();
 
