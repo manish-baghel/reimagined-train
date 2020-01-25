@@ -1,5 +1,6 @@
 import { upload } from "../initServer";
 
-const imageUpload = upload.array("photos",4);
+const reqImageUpload = upload.array("photos",4);
+const schoolImageUpload = upload.single("schoolImage");
 
-export default imageUpload;
+export { schoolImageUpload, reqImageUpload };

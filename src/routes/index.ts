@@ -1,6 +1,6 @@
 import identification from "../middlewares/Identification";
 import expressSession from "../middlewares/expressSession";
-import imageUpload from "../middlewares/imageUpload";
+import {reqImageUpload, schoolImageUpload} from "../middlewares/imageUpload";
 import applicationController from "../controllers/ApplicationController"
 import userController from "../controllers/UserController";
 import requirementController from "../controllers/RequirementController";
@@ -13,7 +13,7 @@ const httpRoutes = (app:any) => {
   app.post('/register',userController.register);
 
   app.get('/getAllReqs',requirementController.getAllRequirements);
-  app.post('/addReq',expressSession,identification,imageUpload,requirementController.addRequirement);
+  app.post('/addReq',expressSession,identification,reqImageUpload,requirementController.addRequirement);
   app.post('/addReqTypes',expressSession,identification,requirementController.addRequirementTypes);
 
   app.post('/addSchool',expressSession,identification,schoolController.register);

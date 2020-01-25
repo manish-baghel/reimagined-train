@@ -8,6 +8,7 @@ import Session from "../db/models/SessionModel";
 import { IToken } from "../middlewares/expressSession";
 import AuthService from "../services/authService";
 import validator from "../utils/validator";
+import { uploadImage } from "../services/awsServices/s3Services";
 
 const registerSchool = async (req:Request, res:Response, next:NextFunction) => {
 	if(!req.body)
@@ -39,9 +40,27 @@ const registerSchool = async (req:Request, res:Response, next:NextFunction) => {
     }
 }
 
+const addSchoolImage = async(req:Request,res:Response,next:NextFunction) => {
+    if(!req.file)
+        return next(boom.badRequest("Please upload Image from your computer"));
+    const user_id = req.session.user_id;
+    if(req.session.data.user.role!="schoolAdmin")
+        return next(boom.unauthorized("You are not authorized to perform this operation"));
+    try{
+        const file = req.file;
+        const imgUrl = await uploadImage({file_path:file.path});
+        const updatedSchool = await School.findOneAndUpdate({_id:req.session.data.user.school},{_id:req.session.data.user.school,image:imgUrl},{new:true});
+        return res.json({status:true,msg:"Image Uploaded succesfully",data:updatedSchool});
+    }catch(err){
+        console.log("Error in addSchoolImage[School Controller] ",err);
+        return res.json({status:false,msg:"Error in uploading image"});
+    }
+}
+
 
 const schoolController = {
-  register:registerSchool
+  register:registerSchool,
+  addSchoolImage:addSchoolImage
 }
 
 export default schoolController;
