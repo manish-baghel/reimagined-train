@@ -7,7 +7,7 @@ import Session from "../db/models/SessionModel";
 import { IToken } from "../middlewares/expressSession";
 import AuthService from "../services/authService";
 import validator from "../utils/validator";
-import { IRole,IUserRegister } from "../db/modelServices/IUserModel";
+import { IUserRegister } from "../db/modelServices/IUserModel";
 
 interface IUserValidation {
     status: boolean,
@@ -21,18 +21,13 @@ const registerUser = async (req:Request, res:Response, next:NextFunction) => {
 	if(!req.body)
 		return next(boom.unauthorized("Please enter all required fields"));
 	let reqObject:IUserRegister = req.body;
-    console.log(reqObject);
-	const role:IRole = {
-		title:"customer"
-	}
+	const role = "donor";
     const {email,first_name,last_name,password,gender,middle_name,phone} = reqObject;
 	const userValidationObject: IUserValidation = _validateUser(first_name,last_name, email, phone);
     if (!userValidationObject.status)
         return res.json(userValidationObject);
-    console.log(userValidationObject);
     try{
     	let hpass = await cryptService.hash(password);
-        console.log("brr");
     	let userModel = {
     		email,
     		first_name,
@@ -43,11 +38,8 @@ const registerUser = async (req:Request, res:Response, next:NextFunction) => {
     		phone,
     		role
     	}
-        console.log("bruhh");
     	const newUser = new User(userModel);
-        console.log(newUser);
     	const user = await newUser.save();
-        console.log("brruhh");
     	if(!user)
     		return next(boom.badImplementation("Unable to create user"));
     	const user_id = user._id.toString();
@@ -62,7 +54,7 @@ const registerUser = async (req:Request, res:Response, next:NextFunction) => {
     	if(!session)
     		return next(boom.badImplementation("Unable to create user session"));
     	const newToken = cryptService.sign({id:session._id.toString()});
-    	return res.json({status:true,msg:"Registered Succesfully",data:{token:newToken,first_name,last_name,email,role:role.title}});
+    	return res.json({status:true,msg:"Registered Succesfully",data:{token:newToken,first_name,last_name,email,role:role}});
     }catch(err){
     	console.log("==> Error in registerUser [userController]", err);
     	return res.json({status:false,msg:"Something Went wrong",data:null});

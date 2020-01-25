@@ -3,12 +3,6 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const roleSchema = new Schema(
-  {
-    title: {type:String, required:true, trim:true}
-  },
-  { timestamps: true }
-);
 
 const userSchema = new Schema(
   {
@@ -19,7 +13,8 @@ const userSchema = new Schema(
     password: {type:String,required:true,trim:true},
     phone: {type:String,required:true,trim:true},
     gender: {type:String,required:true,trim:true},
-    role: roleSchema,
+    role: {type:String,required:true,trim:true,enum:["donor","admin","schoolAdmin"],default:"donor"},
+    school: {type:Schema.Types.ObjectId,default:undefined},
     verified: {type:Boolean,required:true,default:false}
   },
   { timestamps:true}

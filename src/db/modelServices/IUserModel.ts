@@ -1,6 +1,6 @@
 
 export interface IRole {
-  title: "customer"|"agent"|"admin"
+  title: "donor"|"schoolAdmin"|"admin"
 }
 interface IUserModelServiceResponse {
   status: string,
@@ -13,21 +13,6 @@ export interface IAddUserProps {
   password: string
 }
 
-export interface IAddTempUserProps {
-  name?: string,
-  first_name? : string,
-  last_name? : string,
-  gender? : string,
-  college? : string,
-  college_year? : string,
-  college_stream? : string,
-  ref_type? : string,
-  ref_by? : string,
-  ref_code? : string,
-  email: string,
-  phone: string,
-  role: IRole
-}
 export interface IUser {
   first_name: string,
   middle_name? :string,

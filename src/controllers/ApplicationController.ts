@@ -10,7 +10,6 @@ import AuthService from "../services/authService";
 
 
 const login = async(req:Request, res:Response, next:NextFunction) => {
-  console.log("<Here>");
   let { qtype } = req.query;
   if(!qtype)
     qtype = "default";

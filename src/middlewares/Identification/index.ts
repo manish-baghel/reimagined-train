@@ -16,7 +16,7 @@ const identification = async (req:Request, res:Response, next:NextFunction) => {
     const user:any = await User.findOne({_id:userId});
     if(!user)
       return next(boom.unauthorized("User Not Found"));
-    if(req.session.data && user.role.title!=req.session.data.user.role.title)
+    if(req.session.data && user.role!=req.session.data.user.role)
       return next(boom.unauthorized("Stop F***in around"));
     req.session.data = {}
     req.session.data.user = {
@@ -26,6 +26,7 @@ const identification = async (req:Request, res:Response, next:NextFunction) => {
       first_name: user.first_name,
       last_name:user.last_name,
     }
+    req.session.user_id = userId.toString();
 
     return next();
   }catch(err){
