@@ -32,7 +32,7 @@ const identification = async (req:Request, res:Response, next:NextFunction) => {
     return next();
   }catch(err){
     console.log("==> Error in Identif. Middleware :", err);
-    return next(boom.badImplementation(err));
+    return next(boom.badImplementation(err.msg));
   }
 }
 

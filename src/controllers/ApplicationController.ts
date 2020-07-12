@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction} from "express";
 import cryptService from "../services/cryptService";
-import * as path from "path";
 import boom from "boom";
 import User from "../db/models/UserModel";
 import Session from "../db/models/SessionModel";
@@ -86,6 +85,8 @@ const login = async(req:Request, res:Response, next:NextFunction) => {
         const token = cryptService.sign(tokenData);
         const data = {
           name: `${user.first_name} ${user.middle_name} ${user.last_name}`,
+          first_name: user.first_name,
+          last_name: user.last_name,
           gender:gender,
           dob:dob,
           email:email,

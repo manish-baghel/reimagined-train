@@ -27,9 +27,11 @@ const registerUser = async (req:Request, res:Response, next:NextFunction) => {
     if (!userValidationObject.status)
         return res.json(userValidationObject);
     try{
-        let regUser = await User.find({email:email});
-        if(regUser)
-            return next(boom.badRequest("User already exist with this email id"));
+        let regUser = await User.findOne({email:email});
+      if(regUser){
+        console.log("Duplicate Email ", email, regUser);
+        return next(boom.badRequest("User already exist with this email id"));
+      }
     	let hpass = await cryptService.hash(password);
     	let userModel = {
     		email,
@@ -64,7 +66,12 @@ const registerUser = async (req:Request, res:Response, next:NextFunction) => {
     }
 }
 
+const forgotPassword = async (email:string) => {
+  const userObj = await User.findOne({email:email});
 
+  // mailService.sendMail({email,payload});
+
+}
 
 const _validateUser = (first_name: string,last_name: string, email: string, phone: string) => {
     const validationObj = { status: false, msg: '', target: '' };
