@@ -24,6 +24,7 @@ const requirementSchema = new Schema(
 	{
 		type: {type:Schema.Types.ObjectId,ref:"RequirementType"},
 		imgs: [imageSchema],
+    category: {type:String,default:"requirement",enum:['requirement','volunteer'],required:true},
 		description: {type:String},
 		quantity:{type:Number,default:0,required:true},
 		requiredBy: {type:Schema.Types.ObjectId,ref:"User",required:true},

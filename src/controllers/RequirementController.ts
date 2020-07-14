@@ -37,6 +37,7 @@ const addRequirementTypes = async (req: Request, res: Response, next: NextFuncti
   const {reqTypes} = req.body;
   try {
     let reqTypesObj = [];
+    if(typeof reqTypes=="object"){
     for (let i = 0; i < reqTypes.length; i++) {
       let newReqType = await RequirementType.findOneAndUpdate(
         {title: reqTypes[i]},
@@ -44,6 +45,15 @@ const addRequirementTypes = async (req: Request, res: Response, next: NextFuncti
         {new: true, upsert: true}
       );
       reqTypesObj[i] = newReqType;
+    }
+    }else{
+      let newReqType = await RequirementType.findOneAndUpdate(
+        {title: reqTypes},
+        {title: reqTypes},
+        {new: true, upsert: true}
+      );
+      reqTypesObj[0] = newReqType;
+      
     }
     return res.json({status: true, msg: "Types added succesfully", data: reqTypesObj});
   } catch (err) {
@@ -55,7 +65,7 @@ const addRequirementTypes = async (req: Request, res: Response, next: NextFuncti
 const addRequirement = async (req: Request, res: Response, next: NextFunction) => {
   console.log("here000");
   if (!req.body) return next(boom.badRequest("Please enter all required fields"));
-  const {type, description, quantity} = req.body;
+  const {type, category, description, quantity} = req.body;
   const files = req.files;
   const requiredBy = req.session.user_id;
   console.log("here001");
@@ -86,6 +96,7 @@ const addRequirement = async (req: Request, res: Response, next: NextFunction) =
     }
     const newRequirement = new Requirement({
       type,
+      category,
       description,
       imgs: imgObjects,
       requiredBy,
