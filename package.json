@@ -10,7 +10,7 @@
     "start:ts": "ENV='dev' nodemon --watch 'src' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/app.ts",
     "startpd:ts": "ENV='prod' nodemon --watch 'src' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "ENV='prod' tsc"
+    "build": "ENV='prod' nodemon --watch 'src' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/app.ts"
   },
   "repository": {
     "type": "git",
