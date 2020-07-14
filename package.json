@@ -43,7 +43,8 @@
     "mongoose": "^5.7.9",
     "mongoose-type-url": "^1.0.6",
     "multer": "^1.4.2",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "tsc": "^1.20150623.0"
   },
   "devDependencies": {
     "@types/node": "^12.12.7",
