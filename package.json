@@ -44,7 +44,8 @@
     "mongoose-type-url": "^1.0.6",
     "multer": "^1.4.2",
     "path": "^0.12.7",
-    "tsc": "^1.20150623.0"
+    "tsc": "^1.20150623.0",
+    "yenv": "^2.1.0"
   },
   "devDependencies": {
     "@types/node": "^12.12.7",
@@ -52,9 +53,7 @@
     "eslint-config-strongloop": "^2.1.0",
     "nodemon": "^1.19.4",
     "ts-node": "^7.0.1",
-    "tsc": "^1.20150623.0",
     "typescript": "^3.7.2",
-    "typescript-eslint-parser": "^22.0.0",
-    "yenv": "^2.1.0"
+    "typescript-eslint-parser": "^22.0.0"
   }
 }
