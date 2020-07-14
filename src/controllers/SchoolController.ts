@@ -8,7 +8,7 @@ import Session from "../db/models/SessionModel";
 import { IToken } from "../middlewares/expressSession";
 import AuthService from "../services/authService";
 import validator from "../utils/validator";
-import { uploadImage } from "../services/awsServices/s3Services";
+import env from "../env";
 
 const registerSchool = async (req:Request, res:Response, next:NextFunction) => {
 	if(!req.body)
@@ -48,7 +48,7 @@ const addSchoolImage = async(req:Request,res:Response,next:NextFunction) => {
         return next(boom.unauthorized("You are not authorized to perform this operation"));
     try{
         const file = req.file;
-        const imgUrl = await uploadImage({file_path:file.path});
+        let imgUrl = `${env.SERVER_URL}:${env.PORT}/public/uploads/${files[i].filename}`;
         const updatedSchool = await School.findOneAndUpdate({_id:req.session.data.user.school},{_id:req.session.data.user.school,image:imgUrl},{new:true});
         return res.json({status:true,msg:"Image Uploaded succesfully",data:updatedSchool});
     }catch(err){
