@@ -19,6 +19,8 @@ for(let i=0; i<whitelist.length; i++){
 	whitelist[i] = whitelist[i].replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
 }
 
+console.log("---------",whitelist);
+
 const corsOptions = {
 	origin: (origin: any, callback: Function) => {
 
