@@ -37,23 +37,22 @@ const addRequirementTypes = async (req: Request, res: Response, next: NextFuncti
   const {reqTypes} = req.body;
   try {
     let reqTypesObj = [];
-    if(typeof reqTypes=="object"){
-    for (let i = 0; i < reqTypes.length; i++) {
-      let newReqType = await RequirementType.findOneAndUpdate(
-        {title: reqTypes[i]},
-        {title: reqTypes[i]},
-        {new: true, upsert: true}
-      );
-      reqTypesObj[i] = newReqType;
-    }
-    }else{
+    if (typeof reqTypes == "object") {
+      for (let i = 0; i < reqTypes.length; i++) {
+        let newReqType = await RequirementType.findOneAndUpdate(
+          {title: reqTypes[i]},
+          {title: reqTypes[i]},
+          {new: true, upsert: true}
+        );
+        reqTypesObj[i] = newReqType;
+      }
+    } else {
       let newReqType = await RequirementType.findOneAndUpdate(
         {title: reqTypes},
         {title: reqTypes},
         {new: true, upsert: true}
       );
       reqTypesObj[0] = newReqType;
-      
     }
     return res.json({status: true, msg: "Types added succesfully", data: reqTypesObj});
   } catch (err) {
@@ -142,9 +141,9 @@ const commitRequirement = async (req: Request, res: Response, next: NextFunction
       {new: true}
     );
     const user = await User.findOneAndUpdate(
-      {_id:user_id},
-      {_id:user_id, $addToSet: {commitedReqs: reqId}},
-      {new:true}
+      {_id: user_id},
+      {_id: user_id, $addToSet: {commitedReqs: reqId}},
+      {new: true}
     );
     return res.json({status: true, msg: "Requirement Commited", data: requirement});
   } catch (err) {
@@ -194,7 +193,7 @@ const requirementController = {
   getAllRequirements: getAllRequirement,
   getRequirementBySchoolId: getRequirementBySchoolId,
   addRequirementTypes: addRequirementTypes,
-  commitRequirement:commitRequirement
+  commitRequirement: commitRequirement,
 };
 
 export default requirementController;

@@ -19,7 +19,7 @@ prod:
   ENV: "prod"
   PORT: 9001
   CLIENT_PORT: 1234
-  CLIENT_URL: http://localhost 
+  CLIENT_URL: https://uitestdonate.herokuapp.com
   SERVER_URL: http://localhost
   SERVER_URI: https://donatetoschool.herokuapp.com
   devMode: true
