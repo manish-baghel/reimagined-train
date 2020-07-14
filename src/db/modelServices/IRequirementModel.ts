@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import {Schema} from 'mongoose';
 
 export interface IRequirement {
-	type:Schema.Types.ObjectId,
+	type: Schema.Types.ObjectId,
 	
 }

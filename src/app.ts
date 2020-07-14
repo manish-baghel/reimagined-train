@@ -24,6 +24,9 @@ switch(environment){
   case 'dev':
     environmentRunning = "development";
     server = http.createServer(app);
+  case 'prod':
+    environmentRunning= "production";
+    server= http.createServer(app);
   case 'default':
     environmentRunning = "development";
     server = http.createServer(app);

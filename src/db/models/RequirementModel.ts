@@ -28,7 +28,8 @@ const requirementSchema = new Schema(
 		quantity:{type:Number,default:0,required:true},
 		requiredBy: {type:Schema.Types.ObjectId,ref:"User",required:true},
 		school: {type:Schema.Types.ObjectId,ref:"School",required:true},
-		status:{type:String,enum:['active','closed'],default:"active",trim:true}
+		status:{type:String,enum:['active','closed'],default:"active",trim:true},
+    commitedBy:[{type:Schema.Types.ObjectId,ref:"User"}]
 	},
 	{timestamps:true}
 );

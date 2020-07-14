@@ -15,7 +15,8 @@ const userSchema = new Schema(
     gender: {type:String,required:true,trim:true},
     role: {type:String,required:true,trim:true,enum:["donor","admin","schoolAdmin"],default:"donor"},
     school: {type:Schema.Types.ObjectId,default:undefined},
-    verified: {type:Boolean,required:true,default:false}
+    verified: {type:Boolean,required:true,default:false},
+    commitedReqs:[{type:Schema.Types.ObjectId,ref:"Requirement"}]
   },
   { timestamps:true}
 );

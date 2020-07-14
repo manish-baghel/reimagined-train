@@ -15,6 +15,7 @@ const httpRoutes = (app:any) => {
   app.get('/getAllReqs',requirementController.getAllRequirements);
   app.post('/addReq',expressSession,identification,reqImageUpload,requirementController.addRequirement);
   app.post('/addReqTypes',expressSession,identification,requirementController.addRequirementTypes);
+  app.post('/commitReq',expressSession,identification,requirementController.commitRequirement);
 
   app.post('/addSchool',expressSession,identification,schoolController.register);
 }

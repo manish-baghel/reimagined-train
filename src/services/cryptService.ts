@@ -34,7 +34,7 @@ const _verify = async (token:string,cb:Function) => {
     const tokenData:any = await jwt.verify(token, SESSION_SECRET);
     return cb(null,{id: tokenData.id});
   }catch(err){
-    console.log("==> Error in _verify cryptService: ", err);
+    console.log("==> Error in _verify cryptService: ",token ,err);
     return cb(err,null);
   }
 }

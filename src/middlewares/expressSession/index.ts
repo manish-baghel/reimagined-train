@@ -12,6 +12,7 @@ export interface IToken {
 
 const expressSession = async (req:Request, res:Response, next:NextFunction) => {
   const headerToken:any = req.headers[env.AUTH_TOKEN_TITLE] || req.header[env.ADMIN_AUTH_TOKEN_TITLE];
+  console.log("headerToken --> ", headerToken)
   if(!headerToken)
     return next(boom.unauthorized("token not found"));
   try{
