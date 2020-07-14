@@ -14,7 +14,7 @@ const publicPath = path.join(__dirname, "../public/uploads");
 console.log("public path -->", publicPath);
 const createdFse = fse.ensureDirSync(publicPath);
 
-const { PORT } = env;
+const PORT = process.env.PORT || env.PORT || 9001;
 console.log(env.SESSION_SECRET)
 let environmentRunning: string;
 
