@@ -14,7 +14,7 @@ const environment = env.ENV;
 const client_url = env.CLIENT_URL;
 const client_port = env.CLIENT_PORT;
 
-let whitelist = [`${client_url}`];
+let whitelist = [`${client_url}`,`${client_url}:${client_port}`];
 for(let i=0; i<whitelist.length; i++){
 	whitelist[i] = whitelist[i].replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
 }
