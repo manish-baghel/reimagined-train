@@ -10,9 +10,41 @@ import multer from "multer";
 import env from "./env";
 
 const app = express();
+const environment = env.ENV;
+const client_url = env.CLIENT_URL;
+const client_port = env.CLIENT_PORT;
+
+let whitelist = [`${client_url}`];
+for(let i=0; i<whitelist.length; i++){
+	whitelist[i] = whitelist[i].replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
+}
+
+const corsOptions = {
+	origin: (origin: any, callback: Function) => {
+
+		if(origin){
+			origin = origin.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
+		}
+		let isOriginInWhitelist = whitelist.indexOf(origin) !== -1;
+		if (!origin) {
+			isOriginInWhitelist = true;
+		} //same origin
+                if(environment === "dev" || environment === "development"){
+               		return callback(null, true);     
+                }
+		if (isOriginInWhitelist) {
+			callback(null, true);
+		} else {
+			callback(new Error('Not allowed by cors'));
+		}
+	},
+	optionsSuccessStatus: 200,
+	credentials: true
+};
+
 
 app.use(compression());
-app.use(cors());
+app.use(cors(corsOptions));
 
 // view-engine
 app.engine('html',ejs.renderFile);
