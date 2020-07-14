@@ -20,7 +20,7 @@ prod:
   CLIENT_URL: https://manish-baghel.github.io/DonateToSchoolReact
   SERVER_URL: http://localhost
   devMode: true
-  DB_URL: "mongodb+srv://manish-baghel:q1w2e3r4@cluster0.mhnna.mongodb.net/reimagined-train?retryWrites=true&w=majority"
+  DB_URL: "mongodb+srv://manish-baghel:q1w2e3r4@cluster0.mhnna.mongodb.net/reimagined-train?w=majority&retryWrites=true"
   DB_PORT: 27017
   DB_NAME: "reimagined-train"
   SALT_ROUNDS: 9

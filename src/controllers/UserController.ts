@@ -39,7 +39,6 @@ const registerUser = async (req:Request, res:Response, next:NextFunction) => {
     		last_name,
     		password:hpass,
     		gender,
-    		middle_name,
     		phone,
     		role
     	}
