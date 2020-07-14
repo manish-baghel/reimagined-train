@@ -4,6 +4,7 @@ dev:
   PORT: 9001
   CLIENT_URL: http://localhost
   SERVER_URL: http://localhost
+  SERVER_URI: http://localhost:9001
   devMode: true
   DB_URL: "mongodb://localhost"
   DB_PORT: 27017
@@ -20,6 +21,7 @@ prod:
   CLIENT_PORT: 1234
   CLIENT_URL: http://localhost 
   SERVER_URL: http://localhost
+  SERVER_URI: https://donatetoschool.herokuapp.com
   devMode: true
   DB_URL: "mongodb+srv://manish-baghel:q1w2e3r4@cluster0.mhnna.mongodb.net/reimagined-train?w=majority&retryWrites=true"
   DB_PORT: 27017

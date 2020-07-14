@@ -77,7 +77,7 @@ const addRequirement = async (req: Request, res: Response, next: NextFunction) =
     for (let i = 0; i < files.length; i++) {
       console.log(files[i]);
       // let imgUrl = await uploadImage({file_path: files[i].path});
-      let imgUrl = `${env.SERVER_URL}:${env.PORT}/public/uploads/${files[i].filename}`;
+      let imgUrl = `${env.SERVER_URI}/public/uploads/${files[i].filename}`;
       let imgObject = {
         url: imgUrl,
         tag: files[i].originalname,

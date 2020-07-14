@@ -48,7 +48,7 @@ const addSchoolImage = async(req:Request,res:Response,next:NextFunction) => {
         return next(boom.unauthorized("You are not authorized to perform this operation"));
     try{
         const file = req.file;
-        let imgUrl = `${env.SERVER_URL}:${env.PORT}/public/uploads/${file.filename}`;
+        let imgUrl = `${env.SERVER_URI}/public/uploads/${file.filename}`;
         const updatedSchool = await School.findOneAndUpdate({_id:req.session.data.user.school},{_id:req.session.data.user.school,image:imgUrl},{new:true});
         return res.json({status:true,msg:"Image Uploaded succesfully",data:updatedSchool});
     }catch(err){
